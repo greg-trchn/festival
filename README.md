@@ -1,6 +1,6 @@
-#Festival
+# Festival
 
-##Installation
+## Installation
 
 Download the repository
 
@@ -8,5 +8,5 @@ Download the repository
 git clone https://github.com/gregoryturchino/festival.git
 ```
 
-##Description
+## Description
 Sandbox project for training | M2i Formation
