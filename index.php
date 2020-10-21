@@ -4,13 +4,6 @@ session_start();
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }
-
-$content = json_decode(file_get_contents(__DIR__ . '/config/env.json'));
-define('ENV',           $content->env);
-define('DOMAIN_SITE',   $content->domain_site);
-define('BASE_URL',      $content->base_url);
-define('ROOT_HTTP',     DOMAIN_SITE . BASE_URL);
-
 require(__DIR__.'/src/controller/Home.php');
 require(__DIR__.'/src/controller/Connexion.php');
 require(__DIR__.'/src/controller/Register.php');
@@ -18,6 +11,19 @@ require(__DIR__.'/src/controller/Cart.php');
 require(__DIR__.'/src/controller/Ordered.php');
 require(__DIR__.'/src/controller/Purchases.php');
 require(__DIR__.'/src/model/Model.php');
+require(__DIR__.'/src/service/ErrorService.php');
+
+$content = json_decode(file_get_contents(__DIR__ . '/config/env.json'));
+define('ENV',           $content->env);
+define('DOMAIN_SITE',   $content->domain_site);
+define('BASE_URL',      $content->base_url);
+define('ROOT_HTTP',     DOMAIN_SITE . BASE_URL);
+
+if (ENV == 'prod') {
+    ini_set('display_errors', 0);
+    set_error_handler([new ErrorService(), "log"]);
+    register_shutdown_function([new ErrorService(), "shutdown"]);
+}
 
 //$page = filter_input(INPUT_GET, "page");
 $page = $_SERVER['REDIRECT_URL'];
