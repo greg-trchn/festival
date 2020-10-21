@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /src/
 Allow: /src/public/uploads
 
-Sitemap: http://www.example.com/sitemap.xml
+Sitemap: http://http://gregot.alwaysdata.net/sitemap.xml
